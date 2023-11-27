@@ -5,10 +5,10 @@
 
 void generateRandomTextFile(int numWords);
 
-int main(){
-    generateRandomTextFile(17);
-    getchar();
-}
+// int main(){
+//     generateRandomTextFile(17);
+//     getchar();
+// }
 
 void generateRandomTextFile(int numWords){
     FILE* source_fl;
@@ -42,6 +42,7 @@ void generateRandomTextFile(int numWords){
             }
 
         }
+        fclose(write_new);
     }
     
 

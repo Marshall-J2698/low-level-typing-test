@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "random_word_generator.h"
 
 int main() {
     FILE* fl_ptr;
@@ -15,10 +16,10 @@ int main() {
 
     int i = 0;
     int j;
-
+    generateRandomTextFile(20);
     printf("\033[0;36m\e[1mPlease type the following:\e[m\n\n\033[0m");
 
-    fl_ptr = fopen("list_of_words.txt","r");
+    fl_ptr = fopen("randomWords.txt","r");
     if (NULL == fl_ptr){
         printf("nice try bucko. file's not openin for nobody!");
         return 1;
