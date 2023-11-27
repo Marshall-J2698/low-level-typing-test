@@ -21,6 +21,7 @@ int main() {
     fl_ptr = fopen("list_of_words.txt","r");
     if (NULL == fl_ptr){
         printf("nice try bucko. file's not openin for nobody!");
+        return 1;
     }
     else {
         while(fgets(test_text,256,fl_ptr));
