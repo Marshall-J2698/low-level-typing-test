@@ -15,7 +15,7 @@ int main() {
 
     time_t before, after;
     int total_elapsed;
-    double wpm;
+    double sec_double,elapsed_min,wpm;
 
     int size;
 
@@ -54,7 +54,9 @@ int main() {
     }
     after = clock();
     total_elapsed = (after - before) /CLOCKS_PER_SEC;
-    // wpm = 20/(total_elapsed/60);
+    sec_double = total_elapsed;
+    elapsed_min = (sec_double/60);
+    wpm = 20/(elapsed_min);
     printf("\n\nHere are the results: \n");
     printf("\033[0;32m");
     for(j=0;j<size+1;j++){
@@ -68,7 +70,7 @@ int main() {
         }
     }
     printf("\033[0m");
-    printf("\nin %d seconds!",total_elapsed);
+    printf("\n you finished that in\e[0;35m %d seconds\033[0m with a \033[0;36mwpm of %lf\033[0m",total_elapsed,wpm);
     printf("\n\n\ntype ENTER key to close\n");  
     getchar(); 
 return 0;
