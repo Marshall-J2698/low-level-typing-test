@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "random_word_generator.h"
 
 int main() {
@@ -11,6 +12,10 @@ int main() {
     int key_value;
     char key_char;
     char test_text[256];
+
+    time_t before, after;
+    int total_elapsed;
+    double wpm;
 
     int size;
 
@@ -32,6 +37,7 @@ int main() {
     char user_input[256];
     printf(test_text);
     printf("\n\n");
+    before = clock();
     while(i < size){
         key_value = getch();
         key_char = key_value;
@@ -46,6 +52,9 @@ int main() {
             i++;
         }
     }
+    after = clock();
+    total_elapsed = (after - before) /CLOCKS_PER_SEC;
+    // wpm = 20/(total_elapsed/60);
     printf("\n\nHere are the results: \n");
     printf("\033[0;32m");
     for(j=0;j<size+1;j++){
@@ -59,6 +68,7 @@ int main() {
         }
     }
     printf("\033[0m");
+    printf("\nin %d seconds!",total_elapsed);
     printf("\n\n\ntype ENTER key to close\n");  
     getchar(); 
 return 0;
