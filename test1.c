@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <Windows.h>
 #include "random_word_generator.h"
 
 int main() {
@@ -11,17 +12,23 @@ int main() {
 
     int key_value;
     char key_char;
-    char test_text[256];
+    char test_text[2048];
 
     time_t before, after;
     int total_elapsed;
+    int num_words;
     double sec_double,elapsed_min,wpm;
 
-    int size;
+    int size_of_test_text;
 
     int i = 0;
     int j;
-    generateRandomTextFile(20);
+    printf("Welcome to the typing exam! Please enter a number (between 1-25) of words that you'd like to type for the test: ");
+    scanf("%d",&num_words); //TODO change this to fgets + sscanf; not fond of the way I have to use an additonal getchar since \n stuck in buffer...
+    getchar();
+    printf("\n\nGet ready to type...");
+    Sleep(1000);
+    generateRandomTextFile(num_words);
     printf("\033[0;36m\e[1mPlease type the following:\e[m\n\n\033[0m");
 
     fl_ptr = fopen("randomWords.txt","r");
@@ -30,15 +37,15 @@ int main() {
         return 1;
     }
     else {
-        while(fgets(test_text,256,fl_ptr));
+        while(fgets(test_text,2048,fl_ptr));
     }
-    fseek(fl_ptr, 0L, SEEK_END); //I have no idea what this and the following line mean tbh i just found them online when trying to find size of a file in C. Thanks stackOverflow!
-    size = ftell(fl_ptr);
-    char user_input[256];
+    fseek(fl_ptr, 0L, SEEK_END); //I have no idea what this and the following line mean tbh i just found them online when trying to find size_of_test_text of a file in C. Thanks stackOverflow!
+    size_of_test_text = ftell(fl_ptr);
+    char user_input[2048];
     printf(test_text);
     printf("\n\n");
     before = clock();
-    while(i < size){
+    while(i < size_of_test_text){
         key_value = getch();
         key_char = key_value;
         if (key_value==8){
@@ -56,10 +63,10 @@ int main() {
     total_elapsed = (after - before) /CLOCKS_PER_SEC;
     sec_double = total_elapsed;
     elapsed_min = (sec_double/60);
-    wpm = 20/(elapsed_min);
+    wpm = num_words/elapsed_min;
     printf("\n\nHere are the results: \n");
     printf("\033[0;32m");
-    for(j=0;j<size+1;j++){
+    for(j=0;j<size_of_test_text+1;j++){
         if(user_input[j]==test_text[j]){
             printf("%c",test_text[j]);
         }
